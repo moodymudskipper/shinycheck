@@ -3,14 +3,16 @@
 
 # shinycheck
 
+Work in progress\!
+
 It is too easy to step into shiny hell because of typos, copy and paste
 errors or other small details. This is because shiny often fails
 silently, we don’t see what we want to see but no actual error is
 triggered. *{shinycheck}* attempts to make things easier.
 
-This is designed with the {golem} framework in mind, in that case the
-function can be run without arguments in the relevant project. It’s
-quite rough in its current form.
+This is designed with the {golem} framework and conventions in mind, in
+that case the function can be run without arguments in the relevant
+project. It’s quite rough in its current form.
 
 For optimal results attach all packages used by the app and load all
 defined functions, as shinycheck doesn’t comment on functions that don’t
@@ -21,7 +23,7 @@ exist in the workspace.
 install with :
 
 ``` r
-remotes::install_github("shinycheck")
+remotes::install_github("moodymudskipper/shinycheck")
 ```
 
 ## Example

@@ -33,7 +33,7 @@ functions, as shinycheck doesn't comment on functions that don't exist in the wo
 install with : 
 
 ``` r
-remotes::install_github("shinycheck")
+remotes::install_github("moodymudskipper/shinycheck")
 ```
 
 ## Example
