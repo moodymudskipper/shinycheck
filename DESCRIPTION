@@ -1,0 +1,17 @@
+Package: shinycheck
+Title: Check shiny Code
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Antoine",
+           family = "Fabri",
+           role = c("aut", "cre"),
+           email = "antoine.fabri@gmail.com")
+Description: It is too easy to step into shiny hell because of typos, copy and paste errors or other small details, these checks hopefully will make things easier.
+License: GPL-3
+Encoding: UTF-8
+Language: en
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Imports: 
+    here

@@ -1,0 +1,71 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# shinycheck
+
+It is too easy to step into shiny hell because of typos, copy and paste errors 
+or other small details. This is because shiny often fails silently, we don't see
+what we want to see but no actual error is triggered. *{shinycheck}* attempts to make things easier.
+
+This is designed with the  {golem} framework in mind, in that case the function
+can be run without arguments in the relevant project. It's quite rough in its 
+current form.
+
+For optimal results attach all packages used by the app and load all defined 
+functions, as shinycheck doesn't comment on functions that don't exist in the workspace.
+
+## Installation
+
+install with : 
+
+``` r
+remotes::install_github("shinycheck")
+```
+
+## Example
+
+I created some problems in an app and this is the output of `shinycheck::check_shiny()`
+
+```
+-----------------------------------------------------------------------
+Check that all module scripts contain exactly 2 functions named appropriately
+* In 'mod_games.R', ui and server function names should be `mod_games_ui` and `mod_games_server.`
+* In 'mod_main.R', we don't find exactly two functions.`
+-----------------------------------------------------------------------
+Check that all module ui functions use ns() or NS() on argument named id/inputId/outputId
+* In 'mod_games_ui', a call to `tabsetPanel` is not using `NS` or `ns` around its `id`, `inputId` or `outputId` argument
+-----------------------------------------------------------------------
+Check that in ui, module ui functions, named `mod_MODULE_ui` refer to modules which exist and ids fed to them are prefixed with "MODULE_"
+* In 'mod_games_ui', a call to `mod_test_type_ui` is using 'test_typ_ui' as an `id`, which is not prefixed by 'test_type_'
+* In 'mod_games_ui', we find a call to `mod_test_chose_l1_ui` but 'mod_test_chose_l1.R' doesn't exist
+* In 'mod_games_ui', a call to `mod_test_chose_l1_ui` is using 'test_choose_l1_ui' as an `id`, which is not prefixed by 'test_chose_l1_'
+-----------------------------------------------------------------------
+Check that ns() and NS() are never called in an argument that isn't id/inputId/outputId
+* In 'mod_learn_ui', a call to `tabPanel` is using `NS` or `ns` in arguments other than `id`, `inputId` or `outputId`
+-----------------------------------------------------------------------
+Check that the module args of callModule are of the form "mod_MODULENAME_server", that there is an R file properly named for "MODULENAME", and that the id argument is prefixed by "MODULENAME_"
+* In 'mod_learn_server', a call to `callModule` provides a module argument 'mod_newpair_serve' which doesn't not respect the 'mod_MODULENAME_server' convention
+* In 'mod_learn_server', a call to `callModule` has a module argument `mod_gmes_server` but there is no file named 'mod_gmes.R'
+-----------------------------------------------------------------------
+Check that modules and module ids mentionned on both ui and server side are consistent
+* In 'mod_games_server' we find calls to `mod_test_choose_l1_server` but we don't find `mod_test_choose_l1_ui` in `mod_games_ui`'
+* In 'mod_games_ui' we find calls to `mod_test_chose_l1_ui` but we don't find `mod_test_chose_l1_server` in `mod_games_server`'
+* In 'mod_games_server' we find the module id 'test_type_ui' but we don't find it in 'mod_games_ui'
+* In 'mod_games_ui' we find the module id 'test_typ_ui' but we don't find it in 'mod_games_server'
+* In 'mod_learn_server' we find calls to `mod_newpai_server` but we don't find `mod_newpai_ui` in `mod_learn_ui`'
+* In 'mod_learn_server' we find calls to `mod_gmes_server` but we don't find `mod_gmes_ui` in `mod_learn_ui`'
+* In 'mod_learn_ui' we find calls to `mod_newpair_ui` but we don't find `mod_newpair_server` in `mod_learn_server`'
+* In 'mod_learn_ui' we find calls to `mod_games_ui` but we don't find `mod_games_server` in `mod_learn_server`'
+```
